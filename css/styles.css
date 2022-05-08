@@ -1,0 +1,19 @@
+/*background color(yellow): #FFDE00
+headings(red): #FF0000
+text(blue): #3B4CCA
+deep red: #CC0000
+mustard yellow: #B3A125*/
+
+body {
+  background-color: #FFDE00;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+h1 {
+  color: #FF0000;
+  font-size: 30px;
+  font-weight: 700;
+}
