@@ -4,13 +4,23 @@ let pokemonList= [
   { name: 'Charizard', height: 1.7, weight: 90.5, type: ['fire', 'flying'] },
 ]
 
-function printArrayDetails(list){
-  for (let i = 0; i < list.length; i++) {
-    if (pokemonList[i].height >1){
-      document.write("<p>" + pokemonList[i].name + "(height: " + pokemonList[i].height + ") Wow he's tall!" + "</p>");
-    } else {
-      document.write("<p>" + pokemonList[i].name + "(height: " + pokemonList[i].height + ")</p>");
+let pokemonRepository = (function () {
+  let pokemonList = []; // empty array
+
+  return {
+    add: function(pokemon) {
+      pokemonList.push(pokemon);
+    },
+    getAll: function() {
+      return pokemonList;
     }
+  };
+})();
+
+pokemonList.forEach(function(pokemon) {
+  if (pokemon.height >1){
+    document.write("<p>" + pokemon.name + "(height: " + pokemon.height + ") Wow he's tall!" + "</p>");
+  } else {
+    document.write("<p>" + pokemon.name + "(height: " + pokemon.height + ")</p>");
   }
-}
-printArrayDetails(pokemonList);
+});
