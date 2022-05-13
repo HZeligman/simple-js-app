@@ -30,8 +30,8 @@ let pokemonRepository = (function () {
     let buttonItem = document.createElement('button');
     buttonItem.innerText = pokemon.name;
     buttonItem.classList.add('list-button');
-    //button.setAttribute('data-toggle', 'modal');
-    //button.setAttribute('data-target', '#pokemonmodal');
+    buttonItem.setAttribute('data-toggle', 'showModal');
+    buttonItem.setAttribute('data-target', '#pokemonmodal');
     listItem.appendChild(buttonItem);
     buttonList.appendChild(listItem);
     buttonItem.addEventListener('click', () => showDetails(pokemon));
@@ -91,14 +91,14 @@ let pokemonRepository = (function () {
     let typesString = '';
     pokemon.types.forEach(function (type, i) {
       if (i < pokemon.types.length - 1) {
-        typesString += '${type.type.name},'
+        typesString += `${type.type.name},`
       } else {
-        typesString += '${type.type.name}'
+        typesString += `${type.type.name}`
       }
     });
 
     let contentElement = document.createElement('p');
-    contentElement.innerHTML = 'height: ${pokemon.height}<br>Types: ${typesString}';
+    contentElement.innerHTML = `height: ${pokemon.height}<br>Types: ${typesString}`;
 
     let imageElement = document.createElement('img');
     imageElement.src = pokemon.imageUrl;
