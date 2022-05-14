@@ -4,6 +4,10 @@ text(blue): #3B4CCA
 deep red: #CC0000
 mustard yellow: #B3A125*/
 
+nav {
+  background-color: #FFDE00;
+}
+
 body {
   background-color: #FFDE00;
   font-family: 'Lato', sans-serif;
@@ -44,38 +48,6 @@ p {
 
 .list-button:hover {
   opacity: 1
-}
-
-#modal-container.is-visible {
-  position: fixed;
-  padding: 20px;
-  box-sizing: border-box;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-  overflow: auto;
-  display: grid;
-  text-align: center;
-}
-
-.modal {
-  margin: auto;
-  display: inline-block;
-  box-sizing: border-box;
-  background: #FFDE00;
-  padding: 15px;
-  width: 100%;
-  max-width: 600px;
-  text-align: center;
-  position: relative;
-}
-
-.modal-close {
-  position: absolute;
-  background: none
 }
 
 .modal h2 {
