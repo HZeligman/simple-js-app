@@ -9,29 +9,33 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
-  function add(item) {
-    if ((typeof item === 'object') && (Object.keys(item).every((element, i) => element === pokemonKeys[i]))) {
-      pokemonList.push(item);
-    }
+  function add(pokemon) {
+    //if ((typeof item === 'object') && (Object.keys(item).every((element, i) => element === pokemonKeys[i]))) {
+    pokemonList.push(pokemon);
+    //}
   }
 
-  function findPokemon(name) {
-    let givenPokemon = pokemonList.filter(element => element.name === name);
+  //function findPokemon(name) {
+    //let givenPokemon = pokemonList.filter(element => element.name === name);
 
-    if (givenPokemon.length === 1) {
-      return givenPokemon[0];
-    } else if (givenPokemon.length > 1) {
-      return givenPokemon;
-    }
-  }
+    //if (givenPokemon.length === 1) {
+      //return givenPokemon[0];
+    //} else if (givenPokemon.length > 1) {
+      //return givenPokemon;
+    //}
+  //}
 
   function addListItem(pokemon) {
+    let list = document.querySelector('.pokemon-list');
     let listItem = document.createElement('li');
+    listItem.classList.add('group-pokemon-list');
     let buttonItem = document.createElement('button');
     buttonItem.innerText = pokemon.name;
     buttonItem.classList.add('list-button');
-    listItem.appendChild(buttonItem);
-    buttonList.appendChild(listItem);
+    buttonItem.setAttribute('data-toggle', 'modal');
+    buttonItem.setAttribute('data-target', '#pokemonModal');
+    listItem.append(buttonItem);
+    list.append(listItem);
     buttonItem.addEventListener('click', () => showDetails(pokemon));
   }
 
@@ -73,59 +77,28 @@ let pokemonRepository = (function () {
 
   //modal
   function showModal(pokemon) {
-    modalContainer.innerHTML = '';
-
-    let modal = document.createElement('div');
-    modal.classList.add('modal');
-
-    let closeButtonElement = document.createElement('button');
-    closeButtonElement.classList.add('modal-close');
-    closeButtonElement.innerText = 'Close';
-    closeButtonElement.addEventListener('click', hideModal);
-
-    let titleElement = document.createElement('h2');
-    titleElement.innerText = pokemon.name;
-
-    let typesString = '';
-    pokemon.types.forEach(function (type, i) {
-      if (i < pokemon.types.length - 1) {
-        typesString += `${type.type.name},`
+    let modalTitle = $('.modal-title');
+    let modalBody = $('.modal-body');
+    let pokemonName = $('<h2>' + pokemon.name + '</h2>');
+    let pokemonHeight = $('<p>' + "height: " + pokemon.height + '</p>');
+    let imageElement = $('<img class=\'pokemon-modal-image\'>');
+    imageElement.attr("src", pokemon.imageUrl);
+    let typeElement = document.createElement('p');
+    pokemon.types.forEach((type, index) => {
+      if (index === pokemon.types.length - 1) {
+        typeElement.innerText += type.type.name;
       } else {
-        typesString += `${type.type.name}`
+        typeElement.innerText += type.type.name + ", ";
       }
-    });
+    })
 
-    let contentElement = document.createElement('p');
-    contentElement.innerHTML = `height: ${pokemon.height}<br>Types: ${typesString}`;
-
-    let imageElement = document.createElement('img');
-    imageElement.src = pokemon.imageUrl;
-
-    modal.appendChild(closeButtonElement);
-    modal.appendChild(titleElement);
-    modal.appendChild(contentElement);
-    modal.appendChild(imageElement);
-    modalContainer.appendChild(modal);
-
-    modalContainer.classList.add('is-visible');
+    modalTitle.empty();
+    modalBody.empty();
+    modalTitle.append(pokemonName);
+    modalBody.append(imageElement);
+    modalBody.append(pokemonHeight);
+    modalBody.append(typeElement);
   }
-
-  function hideModal() {
-    modalContainer.classList.remove('is-visible');
-  }
-
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
-    hideModal();
-    }
-  });
-
-  modalContainer.addEventListener('click', (e) => {
-    let target = e.target;
-    if (target === modalContainer) {
-      hideModal();
-    }
-  });
 
   return {
     add: add,
