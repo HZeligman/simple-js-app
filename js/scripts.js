@@ -7,9 +7,7 @@ let pokemonRepository = (function () {
   }
 
   function add(pokemon) {
-    //if ((typeof item === 'object') && (Object.keys(item).every((element, i) => element === pokemonKeys[i]))) {
     pokemonList.push(pokemon);
-    //}
   }
 
 
@@ -43,7 +41,7 @@ let pokemonRepository = (function () {
       })
   }
 
-  function loadDetails(item) {
+  function loadDetails (item) {
     let url = item.detailsUrl;
     return fetch(url).then(function (response) {
       return response.json();
@@ -92,6 +90,7 @@ let pokemonRepository = (function () {
     modalBody.append(typeElement);
   }
 
+
   return {
     add: add,
     getAll: getAll,
@@ -100,9 +99,10 @@ let pokemonRepository = (function () {
     loadDetails: loadDetails,
     showDetails: showDetails
   }
+
 })();
 
 pokemonRepository.loadList (). then(function() {
   pokemonRepository.getAll().forEach(pokemon => pokemonRepository.addListItem(pokemon));
 
-  });
+});
